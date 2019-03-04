@@ -116,7 +116,9 @@ def build_model(tparams, leavesList, ancestorsList, options):
     use_noise = theano.shared(numpy_floatX(0.))
 
     x = T.tensor3('x', dtype=config.floatX)
+    print(x.shape)
     y = T.tensor3('y', dtype=config.floatX)
+    print(y.shape)
     mask = T.matrix('mask', dtype=config.floatX)
     lengths = T.vector('lengths', dtype=config.floatX)
 
@@ -130,6 +132,7 @@ def build_model(tparams, leavesList, ancestorsList, options):
         embList.append(tempEmb)
 
     emb = T.concatenate(embList, axis=0)
+    print(emb.shape)
 
     x_emb = T.tanh(T.dot(x, emb))
     hidden = gru_layer(tparams, x_emb, options)
