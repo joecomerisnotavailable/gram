@@ -30,7 +30,7 @@ def get_random_weight(dim1, dim2, left=-0.1, right=0.1):
 
 def load_embedding(options):
     m = np.load(options['embFile'])
-    w = (m['w'] + m['w_tilde']) / 2.0
+    w = m #(m['w'] + m['w_tilde']) / 2.0
     return w
 
 def init_params(options):
@@ -269,6 +269,7 @@ def build_tree(treeFile):
     for k in treeMap.keys():
         leaves.append([k] * ancSize)
     leaves = np.array(leaves).astype('int32')
+    print(ancestors)
     return leaves, ancestors
 
 def train_GRAM(

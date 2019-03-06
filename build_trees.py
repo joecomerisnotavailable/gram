@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     rootCode = len(types)
     types['A_ROOT'] = rootCode
-    print(rootCode)
+    print('len(types):', rootCode)
 
     print('cat1count: %d' % cat1count)
     print('cat2count: %d' % cat2count)
@@ -169,7 +169,6 @@ if __name__ == '__main__':
                 newVisit.append(newTypes[rtypes[code]])
             newPatient.append(newVisit)
         newSeqs.append(newPatient)
-
     pickle.dump(newFiveMap, open(outFile + '.level5.pk', 'wb'), -1)
     pickle.dump(newFourMap, open(outFile + '.level4.pk', 'wb'), -1)
     pickle.dump(newThreeMap, open(outFile + '.level3.pk', 'wb'), -1)

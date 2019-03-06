@@ -1,5 +1,5 @@
 import sys
-import cPickle as pickle
+import pickle as pickle
 import numpy as np
 
 def augmentVisit(visit, code, treeList):
@@ -37,7 +37,7 @@ if __name__=='__main__':
 	coMap = {}
 	count = 0
 	for patient in seqs:
-		if count % 1000 == 0: print count
+		if count % 1000 == 0: print(count)
 		count += 1
 		for visit in patient:
 			for code in visit: 
