@@ -30,7 +30,7 @@ def get_random_weight(dim1, dim2, left=-0.1, right=0.1):
 
 def load_embedding(options):
     m = np.load(options['embFile'])
-    w = m #(m['w'] + m['w_tilde']) / 2.0
+    w = m['W_emb'] * (m['W_emb'] > 0) #(m['w'] + m['w_tilde']) / 2.0
     return w
 
 def init_params(options):
@@ -269,7 +269,6 @@ def build_tree(treeFile):
     for k in treeMap.keys():
         leaves.append([k] * ancSize)
     leaves = np.array(leaves).astype('int32')
-    print(ancestors)
     return leaves, ancestors
 
 def train_GRAM(
@@ -295,7 +294,7 @@ def train_GRAM(
 
     leavesList = []
     ancestorsList = []
-    for i in range(5, 1, -1): # An ICD9 diagnosis code can have at most five ancestors (including the artificial root) when using CCS multi-level grouper. 
+    for i in range(5, 0, -1): # An ICD9 diagnosis code can have at most five ancestors (including the artificial root) when using CCS multi-level grouper. 
         leaves, ancestors = build_tree(treeFile+'.level'+str(i)+'.pk')
         sharedLeaves = theano.shared(leaves, name='leaves'+str(i))
         sharedAncestors = theano.shared(ancestors, name='ancestors'+str(i))
